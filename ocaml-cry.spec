@@ -37,6 +37,8 @@ make install
 /usr/lib64/ocaml/cry/cry.cmx
 /usr/lib64/ocaml/cry/cry.cmxa
 /usr/lib64/ocaml/cry/cry.mli
+/usr/lib64/ocaml/cry/cry_ssl.cmi
+/usr/lib64/ocaml/cry/cry_ssl.cmx
 
 %description
 OCaml low level implementation of the shout protocol.
