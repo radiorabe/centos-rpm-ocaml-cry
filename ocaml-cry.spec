@@ -9,6 +9,7 @@ Source0:  https://github.com/savonet/ocaml-cry/releases/download/0.4.1/ocaml-cry
 
 BuildRequires: ocaml
 BuildRequires: ocaml-findlib
+BuildRequires: ocaml-bytes
 
 %prep
 %setup -q 
