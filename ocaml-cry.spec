@@ -1,15 +1,14 @@
 Name:     ocaml-cry
 
-Version:  0.4.1
+Version:  0.6.1
 Release:  1
 Summary:  OCaml icecast/shoutcast lib
 License:  GPLv2+
 URL:      https://github.com/savonet/ocaml-cry
-Source0:  https://github.com/savonet/ocaml-cry/releases/download/0.4.1/ocaml-cry-0.4.1.tar.gz
+Source0:  https://github.com/savonet/ocaml-cry/releases/download/%{version}/ocaml-cry-%{version}.tar.gz
 
 BuildRequires: ocaml
 BuildRequires: ocaml-findlib
-BuildRequires: ocaml-bytes
 
 %prep
 %setup -q 
