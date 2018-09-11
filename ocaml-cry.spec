@@ -1,6 +1,6 @@
 Name:     ocaml-cry
 
-Version:  0.6.1
+Version:  0.6.2
 Release:  1
 Summary:  OCaml icecast/shoutcast lib
 License:  GPLv2+
