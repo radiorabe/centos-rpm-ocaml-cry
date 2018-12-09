@@ -1,10 +1,12 @@
 %define debug_package %{nil}
 
 Name:     ocaml-cry
-
 Version:  0.6.2
-Release:  0.0%{dist}
+Release:  0.1%{dist}
 Summary:  OCaml icecast/shoutcast lib
+
+%global libname %(echo %{name} | sed -e 's/^ocaml-//')
+
 License:  GPLv2+
 URL:      https://github.com/savonet/ocaml-cry
 Source0:  https://github.com/savonet/ocaml-cry/releases/download/%{version}/ocaml-cry-%{version}.tar.gz
@@ -12,8 +14,22 @@ Source0:  https://github.com/savonet/ocaml-cry/releases/download/%{version}/ocam
 BuildRequires: ocaml
 BuildRequires: ocaml-findlib
 
+
+%description
+OCaml low level implementation of the shout protocol.
+
+
+%package        devel
+Summary:        Development files for %{name}
+Requires:       %{name} = %{version}-%{release}
+
+%description    devel
+The %{name}-devel package contains libraries and signature
+files for developing applications that use %{name}.
+
+
 %prep
-%setup -q 
+%autosetup -n %{name}-%{version}
 
 %build
 ./configure \
@@ -31,23 +47,32 @@ install -d $OCAMLFIND_DESTDIR/%{ocamlpck}
 make install
 
 %files
-/usr/lib64/ocaml/cry/META
-/usr/lib64/ocaml/cry/cry.a
-/usr/lib64/ocaml/cry/cry.cma
-/usr/lib64/ocaml/cry/cry.cmi
-/usr/lib64/ocaml/cry/cry.cmx
-/usr/lib64/ocaml/cry/cry.cmxa
-/usr/lib64/ocaml/cry/cry.mli
-/usr/lib64/ocaml/cry/cry_ssl.cmi
-/usr/lib64/ocaml/cry/cry_ssl.cmx
+%doc README
+%license COPYING
+%{_libdir}/ocaml/%{libname}
+%ifarch %{ocaml_native_compiler}
+%exclude %{_libdir}/ocaml/%{libname}/*.a
+%exclude %{_libdir}/ocaml/%{libname}/*.cmxa
+%exclude %{_libdir}/ocaml/%{libname}/*.cmx
+%exclude %{_libdir}/ocaml/%{libname}/*.mli
+%endif
 
-%description
-OCaml low level implementation of the shout protocol.
+%files devel
+%license COPYING
+%ifarch %{ocaml_native_compiler}
+%{_libdir}/ocaml/%{libname}/*.a
+%{_libdir}/ocaml/%{libname}/*.cmxa
+%{_libdir}/ocaml/%{libname}/*.cmx
+%{_libdir}/ocaml/%{libname}/*.mli
+%endif
 
 %changelog
+* Sun Dec  9 2018 Lucas Bickel <hairmare@rabe.ch> - 0.6.2-0.1
+- Clean up specfile and add seperate -devel package
+
 * Sun Nov 11 2018 Lucas Bickel <hairmare@rabe.ch> - 0.6.2-0.0
 - Clean up Release tag
 - Fix Fedora Rawhide build
 
-* Sun Jul  3 2016 Lucas Bickel <hairmare@rabe.ch>
+* Sun Jul  3 2016 Lucas Bickel <hairmare@rabe.ch> - 0.4.1-1
 - initial version, mostly stolen from https://www.openmamba.org/showfile.html?file=/pub/openmamba/devel/specs/ocaml-cry.spec
