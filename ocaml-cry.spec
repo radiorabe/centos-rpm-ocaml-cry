@@ -1,8 +1,8 @@
 %define debug_package %{nil}
 
 Name:     ocaml-cry
-Version:  0.6.2
-Release:  0.1%{dist}
+Version:  0.6.3
+Release:  0.0%{dist}
 Summary:  OCaml icecast/shoutcast lib
 
 %global libname %(echo %{name} | sed -e 's/^ocaml-//')
@@ -67,6 +67,9 @@ make install
 %endif
 
 %changelog
+* Sat Aug  3 2019 Lucas Bickel <hairmare@rabe.ch> - 0.6.3-0.0
+- Bump to 0.6.3
+
 * Sun Dec  9 2018 Lucas Bickel <hairmare@rabe.ch> - 0.6.2-0.1
 - Clean up specfile and add seperate -devel package
 
