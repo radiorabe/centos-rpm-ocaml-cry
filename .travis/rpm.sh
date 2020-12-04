@@ -4,11 +4,7 @@
 
 set -xe
 
-curl -o /etc/yum.repos.d/liquidsoap.repo https://download.opensuse.org/repositories/home:/radiorabe:/liquidsoap/CentOS_7/home:radiorabe:liquidsoap.repo
-
-yum -y install \
-    epel-release \
-    http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-5.el7.nux.noarch.rpm
+curl -o /etc/yum.repos.d/ocaml.repo "https://download.opensuse.org/repositories/home:/radiorabe:/liquidsoap:/ocaml/CentOS_8/home:radiorabe:liquidsoap:ocaml.repo"
 
 chown root:root ocaml-cry.spec
 

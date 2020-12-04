@@ -1,19 +1,19 @@
 %define debug_package %{nil}
 
 Name:     ocaml-cry
-Version:  0.6.3
-Release:  0.0%{dist}
+Version:  0.6.5
+Release:  0.1%{dist}
 Summary:  OCaml icecast/shoutcast lib
 
 %global libname %(echo %{name} | sed -e 's/^ocaml-//')
 
 License:  GPLv2+
 URL:      https://github.com/savonet/ocaml-cry
-Source0:  https://github.com/savonet/ocaml-cry/releases/download/%{version}/ocaml-cry-%{version}.tar.gz
+Source0:  https://github.com/savonet/ocaml-cry/archive/%{version}.tar.gz?#%{name}-%{version}.tar.gz
 
 BuildRequires: ocaml
 BuildRequires: ocaml-findlib
-
+BuildRequires: ocaml-dune
 
 %description
 OCaml low level implementation of the shout protocol.
@@ -32,22 +32,17 @@ files for developing applications that use %{name}.
 %autosetup -n %{name}-%{version}
 
 %build
-./configure \
-   --prefix=%{_prefix} \
-   -disable-ldconf
-make all
+dune build
 
 %install
-export DESTDIR=%{buildroot}
-export OCAMLFIND_DESTDIR=%{buildroot}$(ocamlfind printconf destdir)
-export OCAMLFIND_LDCONF=ignore
-export DLLDIR=$OCAMLFIND_DESTDIR/stublibs
-
-install -d $OCAMLFIND_DESTDIR/%{ocamlpck}
-make install
+dune install \
+  --prefix %{buildroot} \
+  --libdir %{buildroot}$(ocamlfind printconf destdir) \
+  --mandir %{buildroot}/usr/share/doc/%{name}
+rm -rf %{buildroot}/doc
 
 %files
-%doc README
+%doc README.md CHANGES
 %license COPYING
 %{_libdir}/ocaml/%{libname}
 %ifarch %{ocaml_native_compiler}
@@ -67,6 +62,9 @@ make install
 %endif
 
 %changelog
+* Thu Dec 3 2020 Lucas Bickel <hairmare@rabe.ch> - 0.6.5-0.1
+- Bump to 0.6.5
+
 * Sat Aug  3 2019 Lucas Bickel <hairmare@rabe.ch> - 0.6.3-0.0
 - Bump to 0.6.3
 
